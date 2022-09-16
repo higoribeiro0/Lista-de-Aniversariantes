@@ -1,21 +1,33 @@
 import React from 'react';
-
-const List = ({ people }) => {
+import { FaEdit, FaTrash } from 'react-icons/fa';
+const List = ({ items, removeItem, editItem }) => {
   return (
-    <>
-      {people.map((person) => {
-        const { id, name, age, image } = person;
+    <div className='grocery-list'>
+      {items.map((item) => {
+        const { id, title } = item;
         return (
-          <article key={id} className='person'>
-            <img src={image} alt={name} />
-            <div>
-              <h4>{name}</h4>
-              <p>{age} Anos</p>
+          <article className='grocery-item' key={id}>
+            <p className='title'>{title}</p>
+            <div className='btn-container'>
+              <button
+                type='button'
+                className='edit-btn'
+                onClick={() => editItem(id)}
+              >
+                <FaEdit />
+              </button>
+              <button
+                type='button'
+                className='delete-btn'
+                onClick={() => removeItem(id)}
+              >
+                <FaTrash />
+              </button>
             </div>
           </article>
         );
       })}
-    </>
+    </div>
   );
 };
 
